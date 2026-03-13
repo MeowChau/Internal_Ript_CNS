@@ -1,0 +1,1 @@
+export { useDangKyLichLam } from "./useDangKyLichLam";

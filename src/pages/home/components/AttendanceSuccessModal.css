@@ -1,0 +1,83 @@
+.attendance-success-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: white;
+}
+
+.success-icon-wrapper {
+  width: 90px;
+  height: 90px;
+  border-radius: 45px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.success-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 45px;
+  object-fit: contain;
+}
+
+.success-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.success-slogan {
+  font-size: 16px;
+  color: #1e40af;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.success-info {
+  width: 100%;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.info-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.info-text {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.success-button {
+  width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  background: #1e40af;
+  color: white;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.success-button:hover {
+  background: #1e3a8a;
+}

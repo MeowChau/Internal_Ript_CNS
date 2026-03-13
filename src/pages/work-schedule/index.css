@@ -1,0 +1,499 @@
+.work-schedule-page {
+  background: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.schedule-header {
+  background: #003264;
+  padding: calc(1rem + env(safe-area-inset-top)) 0.75rem 1rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.back-button {
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  height: 2.5rem;
+  padding-left: 0.25rem;
+}
+
+.schedule-header-title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+/* Content Wrapper */
+.schedule-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 2rem;
+}
+
+/* Calendar Container */
+.calendar-container {
+  padding: 1.5rem 1rem;
+}
+
+/* Month Selector */
+.month-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.month-arrow {
+  color: #6b7280;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  transition: all 0.2s ease;
+}
+
+.month-arrow:hover {
+  background: #f3f4f6;
+  border-radius: 50%;
+}
+
+.month-arrow:hover svg path {
+  stroke: #1e40af;
+}
+
+.month-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-transform: capitalize;
+  min-width: 180px;
+  text-align: center;
+}
+
+/* Week Days */
+.week-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.week-day {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.week-day-text {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Calendar Days */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 0.5rem;
+  row-gap: 1.75rem;
+  margin-bottom: 1.5rem;
+  justify-items: center;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  margin-bottom: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  background: transparent;
+}
+
+.calendar-day.empty {
+  visibility: hidden;
+  cursor: default;
+}
+
+.calendar-day:not(.empty):hover {
+  transform: scale(1.05);
+}
+
+.calendar-day:not(.empty):not(.status-fullday):not(.status-morning):not(
+    .status-afternoon
+  ):hover {
+  background: #f3f4f6;
+}
+
+.calendar-day.today {
+  background: #1f2937;
+}
+
+.calendar-day.selected {
+  background: #1e40af;
+  box-shadow: 0 0 0 2px #93c5fd;
+}
+
+/* Status Colors - Full Circle */
+.calendar-day.status-fullday {
+  background: #93c5fd;
+}
+
+.calendar-day.status-fullday .day-number {
+  color: #1f2937;
+}
+
+.calendar-day.status-morning {
+  background: #fde047;
+}
+
+.calendar-day.status-morning .day-number {
+  color: #1f2937;
+}
+
+.calendar-day.status-afternoon {
+  background: #fbbf24;
+}
+
+.calendar-day.status-afternoon .day-number {
+  color: #1f2937;
+}
+
+/* Today takes priority over status colors */
+.calendar-day.today.status-fullday,
+.calendar-day.today.status-morning,
+.calendar-day.today.status-afternoon {
+  background: #1f2937;
+}
+
+.calendar-day.today .day-number {
+  color: white;
+  font-weight: 600;
+}
+
+.day-number {
+  font-size: 0.875rem;
+  color: #1f2937;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.day-number.today,
+.day-number.selected {
+  color: white;
+  font-weight: 600;
+}
+
+/* Attendance Status Dots (Sớm/Muộn - small dots at bottom) */
+.attendance-dots {
+  display: flex;
+  gap: 0.15rem;
+  justify-content: center;
+  position: absolute;
+  bottom: 0.15rem;
+}
+
+.dot {
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-early {
+  background-color: #1e3a8a;
+}
+
+.dot-late {
+  background-color: #ef4444;
+}
+
+/* Old day-dot styles (remove if not used) */
+.day-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  margin-top: 0.125rem;
+}
+
+.day-dot.fullday {
+  background-color: #93c5fd;
+}
+
+.day-dot.morning {
+  background-color: #fde047;
+}
+
+.day-dot.afternoon {
+  background-color: #fbbf24;
+}
+
+/* Legend */
+.calendar-legend {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #e5e7eb;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 3rem;
+}
+
+.legend-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.legend-row {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 0.875rem;
+  justify-content: space-between;
+}
+
+.legend-row:last-child {
+  margin-bottom: 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot.legend-dot-small {
+  width: 0.45rem;
+  height: 0.45rem;
+}
+
+.legend-text {
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 400;
+}
+
+/* Event Section */
+.event-section {
+  margin-top: 0.5rem;
+}
+
+.event-date-header {
+  background: #eef3fa;
+  border-radius: 1.25rem;
+  padding: 0.625rem 1rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event-date-title {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1f2937;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  align-items: center;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #eef3fa;
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.5rem;
+  width: 100%;
+  max-width: 20.4375rem;
+  margin-bottom: 0;
+}
+
+/* Time Circle - Left Side */
+.event-time-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #003264;
+  border-radius: 50%;
+  width: 3.4375rem;
+  height: 3.4375rem;
+  flex-shrink: 0;
+}
+
+.event-time-text {
+  color: white;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+/* Event Content - Right Side */
+.event-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.9375rem;
+  flex: 1;
+  max-width: 12.5rem;
+}
+
+.event-content-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.event-content-row {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.25rem;
+  margin-bottom: 0.125rem;
+}
+
+.event-content-row:last-child {
+  margin-bottom: 0;
+}
+
+/* Attendance Status Text Colors */
+.event-content-row .status-sớm {
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+.event-content-row .status-muộn {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.event-content-row .status-đúng {
+  color: #059669;
+  font-weight: 600;
+}
+
+/* Empty State */
+.schedule-empty {
+  background: #eef3fa;
+  border-radius: 1.5625rem;
+  padding: 0.9375rem;
+  text-align: center;
+  margin-top: 1.125rem;
+  width: 100%;
+  max-width: 20.875rem;
+  align-self: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: #d1d5db;
+  display: none;
+}
+
+.empty-message {
+  color: #1f2937;
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .calendar-container {
+    padding: 1rem 0.75rem;
+  }
+
+  .month-selector {
+    gap: 1rem;
+  }
+
+  .month-title {
+    font-size: 1.125rem;
+    min-width: 160px;
+  }
+
+  .calendar-days {
+    gap: 0.25rem;
+  }
+
+  .legend-row {
+    gap: 1rem;
+  }
+
+  .event-card {
+    padding: 0.625rem 0.5rem;
+    max-width: 100%;
+  }
+
+  .event-time-circle {
+    width: 3.125rem;
+    height: 3.125rem;
+  }
+
+  .event-time-text {
+    font-size: 0.875rem;
+  }
+
+  .event-content {
+    margin-left: 0.75rem;
+  }
+
+  .event-content-title,
+  .event-content-row {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .calendar-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .event-section {
+    max-width: 600px;
+    margin: 1.125rem auto 0;
+  }
+
+  .schedule-empty {
+    margin: 1.125rem auto 0;
+  }
+}

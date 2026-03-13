@@ -1,0 +1,36 @@
+/* Loading Spinner Overlay - must stay fixed to cover viewport */
+.loading-spinner-overlay {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+}
+
+/* Animation container */
+.loading-spinner-overlay > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure spinner is visible above all content */
+.loading-spinner-overlay {
+  pointer-events: auto;
+}
+
+/* Responsive sizing */
+@media (max-width: 375px) {
+  .loading-spinner-overlay > div {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}

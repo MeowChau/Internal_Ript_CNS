@@ -1,0 +1,169 @@
+/* Roboto Font Family */
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Safe Area Support */
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+  --safe-area-inset-left: env(safe-area-inset-left);
+  --safe-area-inset-right: env(safe-area-inset-right);
+}
+
+/* Lock viewport to prevent keyboard resize */
+html {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+  /* Set light background to avoid flash during navigation */
+  background-color: #f3f5f9;
+  /* Extend to cover safe areas */
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  /* Set light background to avoid flash during navigation */
+  background-color: #f3f5f9;
+  top: 0;
+  left: 0;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Set light background to avoid flash during navigation */
+  background-color: #f3f5f9;
+}
+
+/* Hide all scrollbars globally */
+html,
+body,
+#root {
+  overflow-x: hidden !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html,
+body,
+#root {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Override font-family globally */
+* {
+  font-family: 'Roboto', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* Hide all scrollbars globally */
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+* {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+body {
+  font-family: 'Roboto', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.page {
+  padding: 16px 16px 96px 16px;
+}
+
+.section-container {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.zaui-list-item {
+  cursor: pointer;
+}
+
+/* Ẩn navigation bar "Domixi" của Zalo Mini App trên utilities page */
+.utilities-page .zaui-page-header,
+.utilities-page .zaui-navbar,
+.utilities-page [class*="navbar"],
+.utilities-page [class*="NavigationBar"],
+.utilities-page [data-role="navigation-bar"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Đảm bảo page content bắt đầu từ đầu màn hình */
+.utilities-page > div:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Prevent scroll on input focus - login page */
+.login-page input,
+.login-page textarea {
+  /* Prevent iOS from scrolling input into view */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.login-page input:focus,
+.login-page textarea:focus {
+  /* Keep focus without scrolling */
+  scroll-margin: 0;
+  scroll-padding: 0;
+}

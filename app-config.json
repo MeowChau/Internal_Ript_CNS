@@ -1,0 +1,24 @@
+{
+  "app": {
+    "title": "Internal RIPT CNS",
+    "actionBarHidden": true,
+    "statusBar": "transparent",
+    "leftButton": "none",
+    "windowSoftInputMode": "adjustNothing"
+  },
+  "template": {
+    "version": "3",
+    "primaryColor": "#1e40af"
+  },
+  "pages": [
+    "/",
+    "/login",
+    "/home",
+    "/utilities",
+    "/utilities/requests",
+    "/utilities/work-schedule",
+    "/utilities/register-schedule",
+    "/notifications",
+    "/profile"
+  ]
+}

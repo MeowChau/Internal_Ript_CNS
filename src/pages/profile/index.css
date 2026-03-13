@@ -1,0 +1,324 @@
+.profile-page {
+  background: #f3f5f9;
+  min-height: 100vh;
+  padding-bottom: 5rem;
+  position: relative;
+}
+
+.profile-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-size: 100% 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* Content */
+.profile-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 1rem;
+  padding-top: calc(2rem + env(safe-area-inset-top));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Avatar with 3 layers */
+.profile-avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.125rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 3.75rem;
+  background-color: #003264;
+}
+
+.profile-avatar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6.875rem;
+  height: 6.875rem;
+  border-radius: 3.4375rem;
+  background-color: white;
+}
+
+.profile-avatar {
+  width: 6.5625rem !important;
+  height: 6.5625rem !important;
+  border-radius: 3.28125rem !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.profile-name-section {
+  text-align: center;
+  align-items: center;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.profile-name {
+  font-size: 1.5rem; /* 24px like React Native getFont(24) */
+  font-weight: 500; /* RobotoMedium */
+  color: #1f2937;
+  line-height: 2rem; /* 32px like React Native lineHeight: getLineHeight(32) */
+}
+
+.profile-email {
+  font-size: 1rem; /* 16px like React Native getFont(16) */
+  color: #1f2937; /* black0 */
+  font-weight: 400; /* RobotoRegular */
+  line-height: 1.5rem; /* 24px */
+  margin-top: 0.3125rem; /* 5px like React Native marginTop: HEIGHT(5) */
+}
+
+/* Info Card */
+.profile-info-card {
+  background: white;
+  border-radius: 0.625rem; /* 10px */
+  padding: 0.5rem 0.75rem; /* vertical 8px, horizontal 12px */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto; /* 20px vertical, auto horizontal */
+  width: 21.25rem; /* 340px */
+  max-width: 100%;
+}
+
+.info-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.25rem 0.5rem; /* vertical 4px, horizontal 8px */
+  margin: 0.1875rem 0; /* 3px vertical */
+  min-height: auto;
+}
+
+.info-row-last {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  margin: 0.1875rem 0;
+}
+
+.info-label {
+  color: #1f2937; /* black0 */
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 400;
+  width: 6.25rem; /* 100px - fixed width */
+  margin-right: 0.5rem; /* 8px */
+  flex-shrink: 0;
+}
+
+.info-value {
+  color: #9ca3af !important; /* gray-400 */
+  font-size: 0.9rem; /* 16px */
+  line-height: 1.25rem; /* 24px */
+  font-weight: 400;
+  text-align: left;
+  flex: 1;
+}
+
+/* Actions */
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+  width: 21.25rem; /* 340px */
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem; /* 14px 16px */
+  min-height: 3.5rem; /* 56px */
+  background: white;
+  border-radius: 1rem; /* 16px */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-item:active {
+  background-color: #f3f4f6;
+  transform: scale(0.98);
+}
+
+.action-item-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.action-icon-wrapper {
+  width: 2.5rem; /* 40px */
+  height: 2.5rem;
+  border-radius: 0.5rem; /* 8px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.action-text {
+  flex: 1;
+  color: #1f2937; /* black0 */
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 500;
+  margin-left: 0.75rem; /* 12px */
+}
+
+.action-arrow {
+  flex-shrink: 0;
+}
+
+/* ========== RESPONSIVE BREAKPOINTS ========== */
+
+/* Mobile nhỏ (< 360px) */
+@media (max-width: 360px) {
+  .profile-header {
+    height: 220px;
+    min-height: 220px;
+  }
+
+  .profile-avatar-container {
+    bottom: 30px;
+    width: 6.25rem; /* 100px */
+    height: 6.25rem;
+    border-radius: 3.125rem;
+  }
+
+  .profile-avatar-wrapper {
+    width: 5.75rem; /* 92px */
+    height: 5.75rem;
+    border-radius: 2.875rem;
+  }
+
+  .profile-avatar {
+    width: 5.3125rem !important; /* 85px */
+    height: 5.3125rem !important;
+    border-radius: 2.65625rem !important;
+  }
+
+  .profile-name {
+    font-size: 1.375rem;
+  }
+
+  .profile-content {
+    padding: 0 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .profile-info-card,
+  .profile-actions {
+    width: 100%;
+  }
+}
+
+/* Mobile chuẩn (360px - 414px) */
+@media (min-width: 360px) and (max-width: 414px) {
+  .profile-header {
+    height: 240px;
+    min-height: 240px;
+  }
+
+  .profile-avatar-container {
+    bottom: 35px;
+  }
+}
+
+/* Mobile lớn (414px - 768px) */
+@media (min-width: 414px) and (max-width: 768px) {
+  .profile-header {
+    height: 260px;
+    min-height: 260px;
+  }
+
+  .profile-avatar-container {
+    bottom: 40px;
+  }
+}
+
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .profile-header {
+    height: 300px;
+    min-height: 300px;
+  }
+
+  .profile-content {
+    padding: 0 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .profile-name {
+    font-size: 1.875rem;
+  }
+
+  .profile-avatar-container {
+    bottom: 50px;
+    width: 9rem; /* 144px */
+    height: 9rem;
+    border-radius: 4.5rem;
+  }
+
+  .profile-avatar-wrapper {
+    width: 8.25rem; /* 132px */
+    height: 8.25rem;
+    border-radius: 4.125rem;
+  }
+
+  .profile-avatar {
+    width: 7.875rem !important; /* 126px */
+    height: 7.875rem !important;
+    border-radius: 3.9375rem !important;
+  }
+}
+
+/* Desktop (> 1024px) */
+@media (min-width: 1024px) {
+  .profile-header {
+    height: 340px;
+    min-height: 340px;
+  }
+
+  .profile-content {
+    padding: 0 2rem;
+    margin-top: 2rem;
+  }
+
+  .profile-name {
+    font-size: 2rem;
+  }
+
+  .profile-avatar-container {
+    bottom: 60px;
+    width: 10rem; /* 160px */
+    height: 10rem;
+    border-radius: 5rem;
+  }
+
+  .profile-avatar-wrapper {
+    width: 9.25rem; /* 148px */
+    height: 9.25rem;
+    border-radius: 4.625rem;
+  }
+
+  .profile-avatar {
+    width: 8.75rem !important; /* 140px */
+    height: 8.75rem !important;
+    border-radius: 4.375rem !important;
+  }
+}

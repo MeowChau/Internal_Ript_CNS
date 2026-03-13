@@ -1,0 +1,114 @@
+/* Modal overlay */
+.ket-qua-modal .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+}
+
+/* Container */
+.ket-qua-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px 16px 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+/* Icon wrapper nằm gọn trong modal */
+.view-icon {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: #0ea523;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+/* Icon check nằm trong vòng tròn */
+.icon-check {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+/* Content box */
+.view-content {
+  background-color: transparent;
+  border-radius: 0;
+  width: 100%;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+/* Title */
+.view-content .title {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 28px;
+  margin: 10px 0 5px 0;
+  text-align: center;
+  color: #000;
+}
+
+/* Slogan */
+.view-content .slogan {
+  color: #333;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Time text */
+.view-content .time-text {
+  color: #666;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 10px 0 20px 0;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Button OK */
+.btn-ok {
+  border-radius: 8px;
+  margin: 10px 0;
+  width: 120px;
+  background-color: #003264;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.btn-ok:hover {
+  background-color: #00407f;
+}

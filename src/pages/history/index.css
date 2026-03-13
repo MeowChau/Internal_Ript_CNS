@@ -1,0 +1,146 @@
+.history-page {
+  min-height: 100vh;
+  background: #f3f4f6;
+}
+
+/* Header */
+.history-header {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.history-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+/* Filters Section */
+.history-filters {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.history-filter-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.history-select {
+  flex: 1;
+  font-size: 0.875rem;
+}
+
+.history-month-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.history-month-select,
+.history-year-select {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  background: white;
+  color: #374151;
+}
+
+.history-date-input {
+  flex: 1;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background: white;
+  color: #374151;
+}
+
+.history-date-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Content */
+.history-content {
+  padding: 1rem 1.5rem;
+}
+
+.history-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.history-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.history-empty-text {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+/* Request List */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Request Item */
+.history-request-item {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.history-request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.history-request-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  flex: 1;
+}
+
+.history-status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+}
+
+.history-status-text {
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.history-request-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}

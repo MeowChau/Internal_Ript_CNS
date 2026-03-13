@@ -1,0 +1,243 @@
+.don-lam-remote-page {
+  background: white;
+  min-height: 100vh;
+}
+
+/* Header */
+.don-header {
+  background: #003264;
+  padding: calc(1rem + env(safe-area-inset-top)) 0.75rem 1rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.don-header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-button {
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  padding-left: 0.25rem;
+}
+
+.don-header-title {
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.don-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-image {
+  height: 2.1rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.don-content {
+  padding: 1.5rem 0rem;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-label {
+  font-size: 1rem;
+  color: #000;
+  font-weight: 500;
+}
+
+.required {
+  color: #dc2626;
+}
+
+/* Date Input */
+.date-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.date-input-field {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 20px);
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.date-display {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  position: relative;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.date-text {
+  font-size: 0.9375rem;
+  color: #1f2937;
+  flex: 1;
+}
+
+.calendar-icon {
+  flex-shrink: 0;
+  margin-right: 0.2rem;
+}
+
+/* Session Dropdown */
+.session-dropdown-wrapper {
+  position: relative;
+}
+
+.session-dropdown {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.session-dropdown.active {
+  border-color: #1e40af;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.session-text {
+  font-size: 0.9375rem;
+  color: #1f2937;
+}
+
+.session-arrow {
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.session-dropdown.active .session-arrow {
+  transform: rotate(180deg);
+}
+
+.session-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #1e40af;
+  border-top: none;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  z-index: 100;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.session-dropdown-item {
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.session-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.session-dropdown-item:hover {
+  background-color: #f9fafb;
+}
+
+.session-dropdown-text {
+  font-size: 0.9375rem;
+  color: #1f2937;
+}
+
+/* Reason Textarea */
+.reason-textarea {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.9375rem;
+  color: #1f2937;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 120px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.reason-textarea:focus {
+  outline: none;
+  border-color: #1e40af;
+}
+
+.reason-textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* Submit Button */
+.submit-button {
+  background: #003264;
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  width: 20%;
+}
+
+.submit-button:hover {
+  opacity: 0.9;
+}
+
+.submit-button:active {
+  opacity: 0.8;
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

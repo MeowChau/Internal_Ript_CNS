@@ -1,0 +1,333 @@
+.dang-ky-lam-them-page {
+  background: white;
+  min-height: 100vh;
+}
+.dklt-header {
+  background: #003264;
+  padding: calc(1rem + env(safe-area-inset-top)) 0.75rem 1rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dklt-header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.back-button {
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  padding-left: 0.25rem;
+}
+.dklt-header-title {
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+.dklt-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo-image {
+  height: 2.1rem;
+  width: auto;
+  object-fit: contain;
+}
+.dklt-content {
+  padding: 1rem;
+}
+.dklt-stats {
+  text-align: center;
+  font-size: 1rem;
+  color: #1f2937;
+  font-weight: 400;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.stats-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+.btn-save-register {
+  background: #003264 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.75rem !important;
+  padding: 0.75rem 2rem !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  display: block !important;
+  margin: 0 auto 1rem !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0, 50, 100, 0.3) !important;
+}
+.btn-save-register:hover {
+  background: #00407f !important;
+}
+.calendar-container {
+  margin-bottom: 1.5rem;
+}
+.calendar-month {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1rem;
+}
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+.weekday {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-weight: 500;
+  padding: 0.5rem 0;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  width: 100%;
+  padding: 0.25rem;
+}
+.calendar-day.empty {
+  cursor: default;
+}
+.day-number {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1f2937;
+  z-index: 1;
+}
+.day-full {
+  background: #bfdbfe;
+}
+.day-morning {
+  background: #fef08a;
+}
+.day-afternoon {
+  background: #fdba74;
+}
+.day-holiday {
+  background: #d8b4fe;
+}
+.day-today {
+  background: #bfdbfe;
+  border: 2px solid #000;
+}
+.day-today .day-number {
+  color: #1f2937;
+}
+.day-past {
+  background: #9ca3af !important;
+}
+.day-past .day-number {
+  color: #4b5563;
+}
+.day-sunday {
+  opacity: 0.8;
+  cursor: not-allowed !important;
+}
+.day-sunday .day-number {
+  color: #9ca3af;
+}
+.day-selected {
+  background: #000 !important;
+  border: none;
+}
+.day-selected .day-number {
+  color: white !important;
+}
+.calendar-legend {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+  max-width: 100%;
+  margin-left: 15%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent !important;
+}
+.legend-color {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.legend-color.full {
+  background: #bfdbfe;
+}
+.legend-color.morning {
+  background: #fef08a;
+}
+.legend-color.afternoon {
+  background: #fdba74;
+}
+.legend-color.holiday {
+  background: #d8b4fe;
+}
+.legend-text {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+.session-selection {
+  margin-top: 0.5rem;
+  padding-top: 0;
+}
+.session-group {
+  margin-bottom: 1.5rem;
+}
+.session-checkbox-row {
+  display: flex;
+  justify-content: center;
+  gap: 6rem;
+  margin-bottom: 1.5rem;
+}
+.session-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.session-checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  accent-color: #1e40af;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+}
+.session-checkbox:checked {
+  background: #1e40af;
+  border-color: #1e40af;
+  position: relative;
+}
+.session-checkbox:checked::after {
+  content: "✓";
+  position: absolute;
+  color: white;
+  font-size: 0.875rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.session-checkbox:disabled {
+  opacity: 0.8;
+  cursor: not-allowed !important;
+  background: #e5e7eb;
+}
+.session-checkbox:checked:disabled {
+  background: #1e40af;
+  border-color: #1e40af;
+}
+.session-checkbox:checked:disabled::after {
+  content: "✓";
+  position: absolute;
+  color: white;
+  font-size: 0.875rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.session-checkbox-container:has(.session-checkbox:disabled) {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+.session-label {
+  font-size: 1rem;
+  color: #1f2937;
+  font-weight: 500;
+}
+.time-selection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.time-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.time-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.time-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+.time-input-wrapper {
+  position: relative;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.1rem 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+.time-input-wrapper:hover {
+  border-color: #1e40af;
+}
+.time-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #1f2937;
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+.time-input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.time-icon {
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.time-icon:hover {
+  opacity: 0.8;
+}
+.time-input-wrapper:has(.time-input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
