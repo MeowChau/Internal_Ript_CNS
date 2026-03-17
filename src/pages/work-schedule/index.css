@@ -8,7 +8,7 @@
 /* Header */
 .schedule-header {
   background: #003264;
-  padding: calc(1rem + env(safe-area-inset-top)) 0.75rem 1rem 0.75rem;
+  padding: calc(1.65rem + env(safe-area-inset-top, 0px)) 0.75rem 1rem 0.75rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;

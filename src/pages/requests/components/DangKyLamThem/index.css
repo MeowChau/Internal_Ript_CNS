@@ -4,7 +4,7 @@
 }
 .dklt-header {
   background: #003264;
-  padding: calc(1rem + env(safe-area-inset-top)) 0.75rem 1rem 0.75rem;
+  padding: calc(2.2rem + env(safe-area-inset-top, 0px)) 0.75rem 1rem 0.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

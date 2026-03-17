@@ -32,8 +32,6 @@
   position: relative;
   width: 92px;
   height: 92px;
-  border-radius: 50%;
-  background: #0ea523;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,8 +40,8 @@
 
 /* Icon check nằm trong vòng tròn */
 .icon-check {
-  width: 64px;
-  height: 64px;
+  width: 84px;
+  height: 84px;
   object-fit: contain;
 }
 

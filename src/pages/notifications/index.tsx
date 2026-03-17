@@ -10,8 +10,6 @@ function NotificationsPage() {
   return (
     <Page className="notifications-page">
       <Header title="Thông báo" showLogo />
-
-      {/* Tabs */}
       <Box className="notifications-tabs">
         <Box
           className={`notification-tab ${activeTab === "company" ? "active" : ""}`}
@@ -30,8 +28,6 @@ function NotificationsPage() {
           </Text>
         </Box>
       </Box>
-
-      {/* Content */}
       <Box className="notifications-content">
         {activeTab === "company" && (
           <Box className="empty-notifications">
@@ -45,8 +41,6 @@ function NotificationsPage() {
           </Box>
         )}
       </Box>
-
-      {/* Floating Action Buttons */}
       <Box className="floating-actions">
         <Box className="fab-button fab-up">
           <svg viewBox="0 0 225 225" fill="white" className="fab-icon">
@@ -60,7 +54,6 @@ function NotificationsPage() {
           </svg>
         </Box>
       </Box>
-
       <BottomNav activeTab="notifications" />
     </Page>
   );

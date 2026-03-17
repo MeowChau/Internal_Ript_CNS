@@ -11,6 +11,7 @@ import images from "@/assets/images";
 
 function AppRoot() {
   const [showNoNetworkModal, setShowNoNetworkModal] = useState(false);
+  const [appRefreshKey, setAppRefreshKey] = useState(0);
   useEffect(() => {
     configAppView({
       actionBar: {
@@ -53,9 +54,11 @@ function AppRoot() {
   }, []);
 
   const handleRetryConnection = () => {
-    if (typeof navigator !== "undefined" && navigator.onLine) {
-      setShowNoNetworkModal(false);
-      window.location.reload();
+    // Soft refresh app tree to avoid hard webview reload (which can show Mini App dev screen)
+    setAppRefreshKey((prev) => prev + 1);
+
+    if (typeof navigator !== "undefined") {
+      setShowNoNetworkModal(!navigator.onLine);
     }
   };
 
@@ -63,7 +66,7 @@ function AppRoot() {
     <App theme={getSystemInfo().zaloTheme as any}>
       <MonthlyStatsProvider>
         <AttendanceProvider>
-          <ZMPRouter>
+          <ZMPRouter key={appRefreshKey}>
             <MainNavigator />
           </ZMPRouter>
         </AttendanceProvider>

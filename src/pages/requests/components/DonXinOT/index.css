@@ -8,7 +8,7 @@
 /* Header */
 .don-header {
   background: #003264;
-  padding: calc(1rem + env(safe-area-inset-top)) 0.75rem 1rem 0.75rem;
+  padding: calc(2.2rem + env(safe-area-inset-top, 0px)) 0.75rem 1rem 0.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -293,7 +293,8 @@
 
 @media (max-width: 768px) {
   .don-header {
-    padding: calc(0.75rem + env(safe-area-inset-top)) 0.65rem 0.875rem 0.65rem;
+    padding: calc(1.8rem + env(safe-area-inset-top, 0px)) 0.65rem 0.875rem
+      0.65rem;
   }
 
   .don-header-title {

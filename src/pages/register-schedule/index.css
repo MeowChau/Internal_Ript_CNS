@@ -419,13 +419,27 @@
   background: #f9fafb;
   outline: none;
   font-family: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
 }
 
-/* Hide default clock icon */
+/* Hide native time input controls (clock/dropdown arrow/spin) */
 .time-input::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
   appearance: none;
+}
+
+.time-input::-webkit-inner-spin-button,
+.time-input::-webkit-clear-button,
+.time-input::-webkit-outer-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.time-input::-ms-expand {
+  display: none;
 }
 
 .time-input:focus {

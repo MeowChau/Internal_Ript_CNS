@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { Box, Text, Button } from "zmp-ui";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiXCircle } from "react-icons/hi";
@@ -30,16 +30,15 @@ export const BottomNav: React.FC<BottomNavProps> = React.memo(({ activeTab, onCh
   const navigate = useNavigate();
   const location = useLocation();
   const { isCheckOut, loading } = useAttendanceContext();
-  
-  // Navigation throttle and state
+
+  // Navigation throttle state
   const lastNavigationTime = useRef(0);
   const isNavigatingRef = useRef(false);
-  const [isPending, setIsPending] = useState(false);
-  const NAVIGATION_THROTTLE = 500; // Increased from 300ms
+  const NAVIGATION_THROTTLE = 180;
 
   const getCurrentTab = useCallback(() => {
     if (activeTab) return activeTab;
-    
+
     const path = location.pathname;
     if (path === "/home") return "home";
     if (path.startsWith("/utilities")) return "utilities";
@@ -50,6 +49,11 @@ export const BottomNav: React.FC<BottomNavProps> = React.memo(({ activeTab, onCh
 
   const currentTab = getCurrentTab();
 
+  // Release navigation lock as soon as route changes
+  useEffect(() => {
+    isNavigatingRef.current = false;
+  }, [location.pathname]);
+
   // Memoize navItems to prevent recreation on every render
   const navItems = useMemo(() => [
     { id: "home", icon: "home", label: "Trang chủ", route: "/home" },
@@ -58,10 +62,10 @@ export const BottomNav: React.FC<BottomNavProps> = React.memo(({ activeTab, onCh
     { id: "profile", icon: "profile", label: "Cá nhân", route: "/profile" },
   ], []);
 
-  // Throttled navigation handler with immediate UI feedback
+  // Throttled navigation handler
   const handleNavClick = useCallback((route: string, itemId: string) => {
     const now = Date.now();
-    
+
     // Check if already navigating or too soon
     if (isNavigatingRef.current || now - lastNavigationTime.current < NAVIGATION_THROTTLE) {
       return; // Ignore rapid clicks
@@ -71,18 +75,15 @@ export const BottomNav: React.FC<BottomNavProps> = React.memo(({ activeTab, onCh
     if (currentTab !== itemId) {
       isNavigatingRef.current = true;
       lastNavigationTime.current = now;
-      setIsPending(true);
 
-      // Navigate immediately without requestAnimationFrame
       try {
         navigate(route, { replace: false });
-      } catch (error) {
-        console.error("Navigation error:", error);
+      } catch {
+        isNavigatingRef.current = false;
       } finally {
-        // Reset flags after a delay
+        // Fallback unlock in case route change event is delayed
         setTimeout(() => {
           isNavigatingRef.current = false;
-          setIsPending(false);
         }, NAVIGATION_THROTTLE);
       }
     }
@@ -99,16 +100,14 @@ export const BottomNav: React.FC<BottomNavProps> = React.memo(({ activeTab, onCh
     // Nếu không ở trang home, navigate về home trước
     if (currentTab !== "home") {
       isNavigatingRef.current = true;
-      setIsPending(true);
-      
+
       try {
         navigate("/home", { replace: false });
-      } catch (error) {
-        console.error("Navigation error:", error);
+      } catch {
+        isNavigatingRef.current = false;
       } finally {
         setTimeout(() => {
           isNavigatingRef.current = false;
-          setIsPending(false);
         }, NAVIGATION_THROTTLE);
       }
     } else if (onCheckIn) {
@@ -119,12 +118,12 @@ export const BottomNav: React.FC<BottomNavProps> = React.memo(({ activeTab, onCh
 
   return (
     <Box className="bottom-nav">
-      <Box className={`nav-container ${isPending ? 'nav-pending' : ''}`}>
+      <Box className="nav-container">
         {/* First 2 nav items */}
         {navItems.slice(0, 2).map((item) => (
           <Box
             key={item.id}
-            className={`nav-item ${isPending ? 'nav-item-disabled' : ''}`}
+            className="nav-item"
             onClick={() => handleNavClick(item.route, item.id)}
           >
             <BottomTabIcon
@@ -144,13 +143,13 @@ export const BottomNav: React.FC<BottomNavProps> = React.memo(({ activeTab, onCh
           <Button
             onClick={handleCheckInClick}
             loading={loading}
-            disabled={loading || isPending}
+            disabled={loading}
             className="check-in-button"
           >
             {loading ? null : (
-              <img 
-                src={isCheckOut ? images.checkout : images.checkin} 
-                alt={isCheckOut ? "check-out" : "check-in"} 
+              <img
+                src={isCheckOut ? images.checkout : images.checkin}
+                alt={isCheckOut ? "check-out" : "check-in"}
                 className="clock-check-icon"
                 style={{ width: '44px', height: '44px', objectFit: 'contain' }}
               />
@@ -162,7 +161,7 @@ export const BottomNav: React.FC<BottomNavProps> = React.memo(({ activeTab, onCh
         {navItems.slice(2).map((item) => (
           <Box
             key={item.id}
-            className={`nav-item ${isPending ? 'nav-item-disabled' : ''}`}
+            className="nav-item"
             onClick={() => handleNavClick(item.route, item.id)}
           >
             <BottomTabIcon
@@ -181,6 +180,6 @@ export const BottomNav: React.FC<BottomNavProps> = React.memo(({ activeTab, onCh
   );
 }, (prevProps, nextProps) => {
   // Custom comparison for memo - only re-render if these props change
-  return prevProps.activeTab === nextProps.activeTab && 
-         prevProps.onCheckIn === nextProps.onCheckIn;
+  return prevProps.activeTab === nextProps.activeTab &&
+    prevProps.onCheckIn === nextProps.onCheckIn;
 });

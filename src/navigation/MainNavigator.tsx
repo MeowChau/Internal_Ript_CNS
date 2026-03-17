@@ -5,8 +5,7 @@
  * You'll likely spend most of your time in this file when adding new screens.
  */
 import React, { useEffect } from "react";
-import { AnimationRoutes, Route } from "zmp-ui";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
 // Import screen components
 import IndexPage from "@/pages/index";
@@ -65,7 +64,7 @@ export function MainNavigator() {
   }, [location.pathname, navigate]);
 
   return (
-    <AnimationRoutes>
+    <Routes>
       {/* Index Screen - Check authentication and redirect */}
       <Route path="/" element={<IndexPage />} />
       <Route path="/login" element={<LoginPage />} />
@@ -90,7 +89,7 @@ export function MainNavigator() {
       <Route path="/requests/remote" element={<DonLamRemotePage />} />
       <Route path="/utilities/work-schedule" element={<WorkSchedulePage />} />
       <Route path="/utilities/register-schedule" element={<RegisterSchedulePage />} />
-    </AnimationRoutes>
+    </Routes>
   );
 }
 

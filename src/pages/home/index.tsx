@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Page, Text, Avatar, Icon, Button, Modal } from "zmp-ui";
 import moment from "moment";
@@ -66,14 +66,18 @@ function HomePage() {
       if (!isNaN(Number(timeString))) {
         return moment(Number(timeString)).format("HH:mm");
       }
-      
-      if (timeString.includes(":")) {
-        return timeString;
-      }
-      
+
       const parsed = moment(timeString);
       if (parsed.isValid()) {
         return parsed.format("HH:mm");
+      }
+
+      // Fallback: if already HH:mm or HH:mm:ss, keep only HH:mm
+      if (timeString.includes(":")) {
+        const parts = timeString.split(":");
+        if (parts.length >= 2) {
+          return `${parts[0].slice(-2)}:${parts[1]}`;
+        }
       }
       
       return timeString;
@@ -91,10 +95,11 @@ function HomePage() {
     setGlobalLoading(diemDanhLoading);
   }, [diemDanhLoading, setGlobalLoading]);
 
-  const [initialLoading, setInitialLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(() => !hasInitialized);
   const [showWarningModal, setShowWarningModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [showConfirmCheckoutModal, setShowConfirmCheckoutModal] = useState(false);
+  const [enableHeavyVisuals, setEnableHeavyVisuals] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [confirmCheckoutMessage, setConfirmCheckoutMessage] = useState("");
   const [registeredScheduleToday, setRegisteredScheduleToday] =
@@ -103,7 +108,7 @@ function HomePage() {
       chieu: null,
     });
 
-  const loadRegisteredScheduleToday = async () => {
+  const loadRegisteredScheduleToday = useCallback(async () => {
     try {
       const now = new Date();
       const body = {
@@ -146,9 +151,11 @@ function HomePage() {
       console.error("Không thể tải lịch đăng ký hôm nay:", error);
       setRegisteredScheduleToday({ sang: null, chieu: null });
     }
-  };
+  }, []);
 
   useEffect(() => {
+    let cancelled = false;
+
     const init = async () => {
       try {
         const isAuth = await checkAuth();
@@ -159,7 +166,11 @@ function HomePage() {
         }
 
         if (hasInitialized) {
-          setInitialLoading(false);
+          // Do not block UI when returning to Home; rehydrate user in background.
+          if (!cancelled) {
+            setInitialLoading(false);
+          }
+          void loadUser();
           return;
         }
         
@@ -170,21 +181,50 @@ function HomePage() {
           await refreshUser();
         }
 
-        await Promise.all([
-          refreshDiemDanh(),
-          loadRegisteredScheduleToday(),
-        ]);
+        if (!cancelled) {
+          setHasInitialized(true);
+          setInitialLoading(false);
+        }
 
-        setHasInitialized(true);
+        // Keep first render responsive: refresh heavy data after Home is visible.
+        void Promise.all([
+          refreshDiemDanh().catch(() => undefined),
+          loadRegisteredScheduleToday().catch(() => undefined),
+        ]);
 
       } catch (error) {
         console.error("❌ Error in HomePage init:", error);
       } finally {
-        setInitialLoading(false);
+        if (!cancelled) {
+          setInitialLoading(false);
+        }
       }
     };
     init();
-  }, [hasInitialized]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    checkAuth,
+    hasInitialized,
+    loadRegisteredScheduleToday,
+    loadUser,
+    navigate,
+    refreshDiemDanh,
+    refreshUser,
+    setHasInitialized,
+  ]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setEnableHeavyVisuals(true);
+    }, 120);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, []);
 
   const handleCheckInOut = async () => {
     if (loaiDiemDanh === "CHECK_OUT") {
@@ -226,6 +266,11 @@ function HomePage() {
     if (!result.success && result.error) {
       setErrorMessage(result.error);
       setShowErrorModal(true);
+      return;
+    }
+
+    if (result.success && !result.warningData) {
+      await reloadAttendance();
       return;
     }
     
@@ -513,7 +558,9 @@ function HomePage() {
             <img src={images.companyLogo} alt="" className="company-logo-img" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
           </Box>
           <Box className="desk-illustration">
-            <LottieIcon animationData={images.workingMan} width={140} height={105} />
+            {enableHeavyVisuals ? (
+              <LottieIcon animationData={images.workingMan} width={140} height={105} loop={false} />
+            ) : null}
           </Box>
         </Box>
 
@@ -521,7 +568,9 @@ function HomePage() {
           <Text className="section-title">
             Thống kê tháng{" "}
             <span className="title-icon title-lottie">
-              <LottieIcon animationData={images.statistic} width={24} height={24} />
+              {enableHeavyVisuals ? (
+                <LottieIcon animationData={images.statistic} width={24} height={24} loop={false} />
+              ) : null}
             </span>
           </Text>
           
@@ -563,7 +612,9 @@ function HomePage() {
           <Text className="section-title">
             Kết quả trong ngày{" "}
             <span className="title-icon title-lottie">
-              <LottieIcon animationData={images.aim} width={28} height={28} />
+              {enableHeavyVisuals ? (
+                <LottieIcon animationData={images.aim} width={28} height={28} loop={false} />
+              ) : null}
             </span>
           </Text>
           <Box className="attendance-cards">
@@ -586,8 +637,12 @@ function HomePage() {
 
                 const checkInFormatted = formatTime(checkInTime);
                 const checkOutFormatted = formatTime(checkOutTime);
-                const checkInClass = getAttendanceStatusClass(checkInStatus);
-                const checkOutClass = getAttendanceStatusClass(checkOutStatus);
+                const checkInClass = checkInTime
+                  ? getAttendanceStatusClass(checkInStatus || "đúng giờ")
+                  : getAttendanceStatusClass(checkInStatus);
+                const checkOutClass = checkOutTime
+                  ? getAttendanceStatusClass(checkOutStatus || "đúng giờ")
+                  : getAttendanceStatusClass(checkOutStatus);
 
                 return (
                   <>
@@ -621,8 +676,12 @@ function HomePage() {
 
                 const checkInFormatted = formatTime(checkInTime);
                 const checkOutFormatted = formatTime(checkOutTime);
-                const checkInClass = getAttendanceStatusClass(checkInStatus);
-                const checkOutClass = getAttendanceStatusClass(checkOutStatus);
+                const checkInClass = checkInTime
+                  ? getAttendanceStatusClass(checkInStatus || "đúng giờ")
+                  : getAttendanceStatusClass(checkInStatus);
+                const checkOutClass = checkOutTime
+                  ? getAttendanceStatusClass(checkOutStatus || "đúng giờ")
+                  : getAttendanceStatusClass(checkOutStatus);
 
                 return (
                   <>

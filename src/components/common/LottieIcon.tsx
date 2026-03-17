@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Lottie from "lottie-react";
 
 interface LottieIconProps {
@@ -10,7 +10,7 @@ interface LottieIconProps {
   height?: number | string;
 }
 
-export const LottieIcon: React.FC<LottieIconProps> = ({
+export const LottieIcon: React.FC<LottieIconProps> = React.memo(({
   animationData,
   className,
   style,
@@ -18,15 +18,18 @@ export const LottieIcon: React.FC<LottieIconProps> = ({
   width,
   height,
 }) => {
-  const containerStyle: React.CSSProperties = {
-    width: width ?? "100%",
-    height: height ?? "100%",
-    ...style,
-  };
+  const containerStyle = useMemo<React.CSSProperties>(
+    () => ({
+      width: width ?? "100%",
+      height: height ?? "100%",
+      ...style,
+    }),
+    [height, style, width],
+  );
 
   return (
     <div className={className} style={containerStyle}>
       <Lottie animationData={animationData} loop={loop} style={containerStyle} />
     </div>
   );
-};
+});

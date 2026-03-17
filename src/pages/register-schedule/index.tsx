@@ -545,7 +545,6 @@ function RegisterSchedulePage() {
         onRightText={handleSuccessBack}
         turnOffModal={handleSuccessBack}
       />
-
       {/* Error Modal */}
       <BaseModal
         visible={showErrorModal}

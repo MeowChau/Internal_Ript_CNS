@@ -7,17 +7,13 @@ import "@/css/app.scss";
 
 import React from "react";
 import { createRoot } from "react-dom/client";
-
 import App from "@/App";
 import { apiDebug } from "@/utils/api.debug";
-
 import appConfig from "../app-config.json";
 
 if (!window.APP_CONFIG) {
   window.APP_CONFIG = appConfig as any;
 }
-
-// Initialize API debug utility
 if (import.meta.env.DEV) {
   apiDebug.inspect();
 }

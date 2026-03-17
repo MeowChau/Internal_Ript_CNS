@@ -154,10 +154,6 @@ export const MonthlyStatsProvider: React.FC<MonthlyStatsProviderProps> = ({ chil
   );
 };
 
-/**
- * Hook để sử dụng monthly stats context
- * Sử dụng trong các component cần lấy thống kê tháng
- */
 export const useMonthlyStats = (): MonthlyStatsContextValue => {
   const context = useContext(MonthlyStatsContext);
   

@@ -1,10 +1,10 @@
 export interface User {
   id?: string;
   name?: string;
-  username?: string; // Add username from login
+  username?: string;
   email?: string;
   avatar?: string;
-  accountId?: string; // Add this
+  accountId?: string; 
   team?: string;
   phone?: string; // Add this
   role?: string;

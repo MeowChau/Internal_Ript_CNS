@@ -142,12 +142,11 @@ export const useDiemDanh = () => {
   // LOAD INITIAL DATA
   // ============================================
   useEffect(() => {
-    initData();
+    void initData();
   }, []);
 
   const initData = async () => {
-    await getDeviceInfo();
-    await loadThongTinDiemDanh();
+    await Promise.all([getDeviceInfo(), loadThongTinDiemDanh()]);
   };
 
   const getDeviceInfo = async () => {
@@ -489,6 +488,70 @@ export const useDiemDanh = () => {
 
         if (res && res.status === 200 && res.data) {
           const responseData = res.data.data || res.data;
+
+          const targetBuoi =
+            body?.buoi === BUOI_TRONG_NGAY.CHIEU
+              ? BUOI_TRONG_NGAY.CHIEU
+              : BUOI_TRONG_NGAY.SANG;
+
+          // Update local thongTinDiemDanh immediately so UI reflects new time without refresh
+          setThongTinDiemDanh((prev) => {
+            const baseState: ThongTinDiemDanh =
+              prev ||
+              ({
+                sang: {},
+                chieu: {},
+                buoi_lam_viec: targetBuoi,
+              } as ThongTinDiemDanh);
+
+            const currentBuoiData =
+              targetBuoi === BUOI_TRONG_NGAY.SANG
+                ? baseState.sang
+                : baseState.chieu;
+
+            return {
+              ...baseState,
+              buoi_lam_viec: targetBuoi,
+              [targetBuoi]: {
+                ...currentBuoiData,
+                thoi_gian_check_in: isCheckIn
+                  ? responseData.thoiGianCheckIn ||
+                    responseData.thoi_gian_check_in ||
+                    currentBuoiData?.thoi_gian_check_in
+                  : currentBuoiData?.thoi_gian_check_in,
+                thoi_gian_check_out: !isCheckIn
+                  ? responseData.thoiGianCheckOut ||
+                    responseData.thoi_gian_check_out ||
+                    currentBuoiData?.thoi_gian_check_out
+                  : currentBuoiData?.thoi_gian_check_out,
+              },
+            };
+          });
+
+          // Persist to storage for consistency with other attendance consumers
+          try {
+            const { StorageService } = await import("@/services/storage");
+            const { STORAGE_KEYS } = await import("@/config/Constants");
+
+            const key = isCheckIn
+              ? targetBuoi === BUOI_TRONG_NGAY.SANG
+                ? STORAGE_KEYS.MORNING_CHECK_IN
+                : STORAGE_KEYS.AFTERNOON_CHECK_IN
+              : targetBuoi === BUOI_TRONG_NGAY.SANG
+                ? STORAGE_KEYS.MORNING_CHECK_OUT
+                : STORAGE_KEYS.AFTERNOON_CHECK_OUT;
+
+            const value = isCheckIn
+              ? responseData.thoiGianCheckIn || responseData.thoi_gian_check_in
+              : responseData.thoiGianCheckOut ||
+                responseData.thoi_gian_check_out;
+
+            if (value) {
+              await StorageService.set(key, value);
+            }
+          } catch {
+            // Ignore storage sync errors to avoid blocking UI update
+          }
 
           // Toggle local mode so user can check-out after a successful check-in,
           // even when attendance status endpoint is unavailable.
