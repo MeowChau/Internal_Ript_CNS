@@ -49,4 +49,4 @@
 
 ## Demo
 
-![Login](./src/assets/images/demoLogin.png)
+![Login](./src/assets/images/demoLogo.png)
