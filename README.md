@@ -50,3 +50,8 @@
 ## Demo
 
 ![Login](./src/assets/images/demoLogo.png)
+![Home](./src/assets/images/demoHome.png)
+![No Wifi](./src/assets/images/demoNoWifi.png)
+![Calendar](./src/assets/images/demoCalendar.png)
+![Request](./src/assets/images/demoRequest.png)
+![History Request](./src/assets/images/demoHistoryRequest.png)
